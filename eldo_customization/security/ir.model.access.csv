@@ -6,3 +6,5 @@ access_meter_account,access_meter_account,model_meter_account,,1,1,1,1
 access_meters,access_meters,model_meters,,1,1,1,1
 access_tarrifs,access_tarrifs,model_tarrifs,,1,1,1,1
 access_mdms_server,access_mdms_server,model_mdms_server,,1,1,1,1
+access_helpdesk_ticket_stage_tracking,access_helpdesk_ticket_stage_tracking,model_helpdesk_ticket_stage_tracking,,1,1,1,1
+access_helpdesk_report,access_helpdesk_report,model_helpdesk_report,,1,1,1,1

@@ -7,7 +7,7 @@
     'author':  '',
     'website': '',
     'depends': [
-        'base', 'mail', 'helpdesk', 'web'
+        'base', 'mail', 'helpdesk', 'helpdesk_timesheet', 'web'
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -21,6 +21,7 @@
         'views/tarrifs_view.xml',
         'views/helpdesk_ticket_type_view.xml',
         'views/helpdesk_ticket_views.xml',
+        'report/helpdesk_report_view.xml'
     ],
     'qweb': [
         'static/src/xml/template.xml'

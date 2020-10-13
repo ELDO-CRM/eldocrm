@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-	<record id="helpdesk_tickets_view_tree_inherit"
-		model="ir.ui.view">
-		<field name="name">helpdesk.ticket.tree</field>
-		<field name="model">helpdesk.ticket</field>
-		<field name="inherit_id"
-			ref="helpdesk.helpdesk_tickets_view_tree" />
-		<field name="arch" type="xml">
-			<xpath expr="//tree" position="inside">
-				<field name="stage_name" invisible="1" />
-			</xpath>
-			<xpath expr="/tree" position="attributes">
-				<attribute name="decoration-danger">stage_name == 'New Email'</attribute>
-				<attribute name="decoration-bf">stage_name == 'New Email'</attribute>
-			</xpath>
-		</field>
-   	</record>
+    <record id="helpdesk_tickets_view_tree_inherit" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.tree</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="stage_name" invisible="1" />
+            </xpath>
+            <xpath expr="/tree" position="attributes">
+                <attribute name="decoration-danger">stage_name == 'New Email'</attribute>
+                <attribute name="decoration-bf">stage_name == 'New Email'</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="helpdesk_ticket_view_form_inherit_helpdesk_timesheet_inherit" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_timesheet.helpdesk_ticket_view_form_inherit_helpdesk_timesheet"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Stage Tracking">
+                    <field name="stage_tracking_ids" readonly="1">
+                        <tree>
+                            <field name="ticket_id" invisible="1"/>
+                            <field name="stage_id"/>
+                            <field name="start_date" invisible="1"/>
+                            <field name="end_date" invisible="1"/>
+                            <field name="time_spent" widget="float_time" sum="Total Time Spent"/>
+                        </tree>
+                    </field>
+                </page> 
+            </xpath> 
+        </field>
+    </record>
+
 </odoo>
