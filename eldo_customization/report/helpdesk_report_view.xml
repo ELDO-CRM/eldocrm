@@ -14,6 +14,20 @@
          </field>
     </record>
 
+    <record id="view_helpdesk_report_search" model="ir.ui.view">
+        <field name="name">helpdesk.reportsearch</field>
+        <field name="model">helpdesk.report</field>
+        <field name="arch" type="xml">
+            <search string="Helpdesk Report">
+                <group expand="0" string="Group By">
+                    <filter name="groupby_stage_id" string="Stage" context="{'group_by':'stage_id'}"/>
+                    <filter name="groupby_ticket_type_id" context="{'group_by': 'ticket_type_id'}" string="Ticket Type"/>
+                    <filter name="groupby_team_id" context="{'group_by': 'team_id'}" string="Team"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="action_helpdesk_report" model="ir.actions.act_window">
         <field name="name">Helpdesk Report</field>
         <field name="res_model">helpdesk.report</field>

@@ -31,6 +31,8 @@ class HelpdeskTicket(models.Model):
                     'stage_id': res.stage_id.id,
                     'ticket_id': res.id,
                     'start_date': curr_datetime,
+                    'ticket_type_id': res.ticket_type_id.id if res.ticket_type_id else False,
+                    'team_id': res.team_id.id if res.team_id.id else False
                 })
         return res
 
@@ -45,6 +47,8 @@ class HelpdeskTicket(models.Model):
                         'stage_id': vals.get('stage_id'),
                         'ticket_id': rec.id,
                         'start_date': curr_datetime,
+                        'ticket_type_id': rec.ticket_type_id.id if rec.ticket_type_id else False,
+                        'team_id': rec.team_id.id if rec.team_id.id else False
                     })
                 else:
                     track_id.write({
@@ -66,6 +70,8 @@ class HelpdeskTicketStageTracking(models.Model):
 
     stage_id = fields.Many2one('helpdesk.stage', string="Name")
     ticket_id = fields.Many2one('helpdesk.ticket', string="Ticket")
+    ticket_type_id = fields.Many2one('helpdesk.ticket.type', string="Ticket Type")
+    team_id = fields.Many2one('helpdesk.team', string="Helpdesk Team")
     start_date = fields.Datetime('Start Date')
     end_date = fields.Datetime('End Date')
     time_spent = fields.Float('Time Spent')

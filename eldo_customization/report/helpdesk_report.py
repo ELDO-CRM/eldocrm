@@ -10,15 +10,19 @@ class HelpdeskReport(models.Model):
     _auto = False
 
     stage_id = fields.Many2one('helpdesk.stage', string="Helpdesk Stage", readonly=True)
-    total_time_spent = fields.Float('Total Time Spent')
-    avg_time_spent = fields.Float('Average Time Spent')
-    tickets = fields.Integer('Tickets')
+    ticket_type_id = fields.Many2one('helpdesk.ticket.type', string="Ticket Type", readonly=True)
+    team_id = fields.Many2one('helpdesk.team', string="Helpdesk Team", readonly=True)
+    total_time_spent = fields.Float('Total Time Spent', readonly=True)
+    avg_time_spent = fields.Float('Average Time Spent', readonly=True)
+    tickets = fields.Integer('Tickets', readonly=True)
 
     def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
         with_ = ("WITH %s" % with_clause) if with_clause else ""
         select_ = """
             MIN(htst.stage_id) AS id,
             htst.stage_id AS stage_id,
+            htst.ticket_type_id AS ticket_type_id,
+            htst.team_id AS team_id,
             SUM(htst.time_spent) AS total_time_spent,
             (SUM(htst.time_spent) / count(htst.ticket_id)) AS avg_time_spent,
             count(htst.ticket_id) AS tickets,
@@ -29,7 +33,9 @@ class HelpdeskReport(models.Model):
             %s
         """ % from_clause
         groupby_ = """
-            htst.stage_id
+            htst.stage_id,
+            htst.ticket_type_id,
+            htst.team_id
         """
         return '%s (SELECT %s FROM %s GROUP BY %s)' % (with_, select_, from_, groupby_)
 
