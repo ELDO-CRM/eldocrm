@@ -11,6 +11,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'security/security.xml',
         'data/mail_data.xml',
         'data/helpdesk_stage_data.xml',
         'views/templates.xml',
